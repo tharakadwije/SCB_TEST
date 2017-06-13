@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<!-- define angular app -->
+<html ng-app="scotchApp">
+
+<head>
+
+  <!-- SCROLLS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
+
+  <!-- SPELLS -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+   <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+   
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script> 
+   
+    <script src="data-table.min.js"></script>
+ 
+  
+  <script src="script.js"></script>
+</head>
+
+<!-- define angular controller -->
+<body >
+
+  <nav class="navbar navbar-default">
+    <div class="container">                  
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">CSB Example</a>
+      </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="#about"><i class="fa fa-shield"></i> About</a></li>
+        <li><a href="#contact"><i class="fa fa-comment"></i> Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="main">
+   
+   <div ng-controller="MyCtrl">
+  <table datatable="ng" dt-options="dtOptions" id="example" class="table table-hover" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <!--  <th>Year</th> -->
+                <th>Category</th>
+                <th>Laureates</th>
+             </tr>
+        </thead>
+        <tbody>
+            <tr  data-toggle="modal" data-target="#myModal" ng-repeat="prize in prizes">
+                <td ng-click="go(prize);">{{$index + 1}}</td>
+                <!-- <td ng-click="go(prize);">{{prize.year}}</td> -->
+                <td ng-click="go(prize);">{{prize.category}}</td>
+                <td ng-click="go(prize);">
+                     <ul>
+                       <li ng-repeat="lac in prize.laureates"> 
+                         {{lac.motivation}} 
+                       </li>
+                     </ul>
+               </td>
+            </tr>
+      
+                 <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog">
+              
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">All the laureates</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Laureates</p> <!-- datatable="ng" dt-options="laureatesexample"  -->
+                    <ul ng-repeat="lacs in prizeforlec.laureates">
+                       <div  ng-show="!isEmpty(lacs)" > 
+                          <li> First Name : {{lacs.firstname}} </li>
+                          <li> Last Name : {{lacs.surname}} </li>
+                          <li> Motivation :{{lacs.motivation}} </li>
+                          <li> Share :{{lacs.share}} </li>
+                       </div>
+                     </ul>
+                   </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+      </tbody>
+    </table>
+    </div>
+
+ 
+  
+   
+    <div ng-view>
+
+    </div>
+    
+  </div>
+  
+  <footer class="text-center">
+    <p>Made by Tharaka Dinesh</a></p>
+  
+   
+   
+  </footer>
+  
+</body>
+
+</html>
